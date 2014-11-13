@@ -5,9 +5,9 @@
  * @name lunchAppApp.controller:AboutCtrl
  * @description
  * # AboutCtrl
- * Controller of the lunchAppApp
+ * Controller of the lunchApp
  */
-angular.module('lunchAppApp')
+angular.module('lunchApp')
   .controller('AboutCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',

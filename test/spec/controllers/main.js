@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('Controller: RestaurantsCtrl', function () {
 
   // load the controller's module
   beforeEach(module('lunchAppApp'));

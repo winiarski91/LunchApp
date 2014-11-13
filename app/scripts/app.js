@@ -9,19 +9,14 @@
  * Main module of the application.
  */
 angular
-  .module('lunchAppApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch'
+  .module('lunchApp', [
+    'ngRoute'
   ])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: '../views/Restaurants.html',
+        controller: 'RestaurantsCtrl'
       })
       .when('/about', {
         templateUrl: 'views/about.html',

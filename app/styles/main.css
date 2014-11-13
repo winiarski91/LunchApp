@@ -77,3 +77,11 @@ body {
     border-bottom: 0;
   }
 }
+
+.votingButton {
+  cursor: pointer;
+}
+
+.paddingLeft1px {
+  padding-left: 1px;
+}
