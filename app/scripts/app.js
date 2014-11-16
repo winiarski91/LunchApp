@@ -9,20 +9,19 @@
  * Main module of the application.
  */
 angular
-  .module('lunchApp', [
-    'ngRoute'
-  ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: '../views/Restaurants.html',
+  .module('lunchApp', ['ui.router'])
+  .config(function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('Home');
+
+    $stateProvider
+      .state('Home', {
+        url: '/Home',
+        templateUrl: 'views/Restaurants.html',
         controller: 'RestaurantsCtrl'
       })
-      .when('/about', {
+      .state('About', {
+        url: '/About',
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
       });
   });
