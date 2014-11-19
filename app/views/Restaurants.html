@@ -1,13 +1,13 @@
 <h3>Restaurants</h3>
 <div class="row restaurant" ng-repeat="restaurant in restaurants | orderBy:'upVoteCount':true">
   <div class="well col-lg-1 col-md-1 col-sm-1 col-xs-2">
-    <div class="votingButton" ng-click="upVote(restaurant)">
+    <div class="votingButton" >
       <i class="glyphicon glyphicon-chevron-up paddingLeft1px"></i>
     </div>
     <div class="badge badge-overrides">
       <div>{{restaurant.upVoteCount}}</div>
     </div>
-    <div class="votingButton" ng-click="downVote(restaurant)">
+    <div class="votingButton" >
       <i class="glyphicon glyphicon-chevron-down a"></i>
     </div>
   </div>

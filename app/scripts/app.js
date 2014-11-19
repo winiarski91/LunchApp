@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('lunchApp', ['ui.router'])
+  .module('lunchApp', ['ui.router', 'firebase'])
   .config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('Home');
 
