@@ -1,19 +1,31 @@
-<h3>Restaurants</h3>
-<div class="row restaurant" ng-repeat="restaurant in restaurants | orderBy:'upVoteCount':true">
-  <div class="well col-lg-1 col-md-1 col-sm-1 col-xs-2">
-    <div class="votingButton" ng-click="upVote(restaurant)">
-      <i class="glyphicon glyphicon-chevron-up paddingLeft1px"></i>
-    </div>
-    <div class="badge badge-overrides">
-      <div>{{restaurant.upVoteCount}}</div>
-    </div>
-    <div class="votingButton" ng-click="downVote(restaurant)">
-      <i class="glyphicon glyphicon-chevron-down a"></i>
-    </div>
+<form role="form" ng-hide="hideForm()" ng-submit="submit()">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input ng-model="username" type="name" class="form-control" id="username" placeholder="Enter your username">
   </div>
-  <div class="well col-lg-11 col-md-11 col-sm-11 col-xs-10">
-    <h4 class="well-title">{{restaurant.name}}</h4>
-    <span>{{restaurant.description}}</span>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+<div ng-show="hideForm()">
+  <h2>Hello {{username}}</h2>
+  <h3>Restaurants</h3>
+
+  <div class="row restaurant" ng-repeat="restaurant in restaurants | orderBy:'upVoteCount':true">
+    <div class="well col-lg-1 col-md-1 col-sm-1 col-xs-2">
+      <div class="votingButton" ng-click="upVote(restaurant)">
+        <i class="glyphicon glyphicon-chevron-up paddingLeft1px"></i>
+      </div>
+      <div class="badge badge-overrides">
+        <div>{{restaurant.upVoteCount}}</div>
+      </div>
+      <div class="votingButton" ng-click="downVote(restaurant)">
+        <i class="glyphicon glyphicon-chevron-down a"></i>
+      </div>
+    </div>
+    <div class="well col-lg-11 col-md-11 col-sm-11 col-xs-10">
+      <h4 class="well-title">{{restaurant.name}}</h4>
+      <span>{{restaurant.description}}</span>
+    </div>
   </div>
 </div>
 

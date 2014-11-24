@@ -8,10 +8,20 @@
  * Controller of the lunchApp
  */
 angular.module('lunchApp')
-  .controller('RestaurantsCtrl', function ($scope, $firebase) {
+  .controller('RestaurantsCtrl', function ($scope, $firebase, nameService) {
     var ref = new Firebase('https://lunchwebapp.firebaseio.com/restaurants');
     var sync = $firebase(ref);
     $scope.restaurants = sync.$asArray();
+    $scope.hideForm = function() {
+      var username = nameService.getName();
+      console.log(username === null);
+      console.log(username);
+      if(username !== null) {
+        $scope.username = username;
+        return true;
+      }
+      return false;
+    };
 
     $scope.upVote = function(restaurant) {
       restaurant.upVoteCount++;
@@ -22,4 +32,10 @@ angular.module('lunchApp')
       restaurant.upVoteCount--;
       $scope.restaurants.$save(restaurant);
     };
+
+    $scope.submit = function() {
+      nameService.setName($scope.username);
+    };
+
+
   });
