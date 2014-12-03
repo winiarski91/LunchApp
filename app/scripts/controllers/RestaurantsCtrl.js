@@ -14,8 +14,6 @@ angular.module('lunchApp')
     $scope.restaurants = sync.$asArray();
     $scope.hideForm = function() {
       var username = nameService.getName();
-      console.log(username === null);
-      console.log(username);
       if(username !== null) {
         $scope.username = username;
         return true;
