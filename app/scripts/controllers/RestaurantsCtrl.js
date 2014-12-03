@@ -8,8 +8,8 @@
  * Controller of the lunchApp
  */
 angular.module('lunchApp')
-  .controller('RestaurantsCtrl', function ($scope, $firebase, nameService) {
-    var ref = new Firebase('https://lunchwebapp.firebaseio.com/restaurants');
+  .controller('RestaurantsCtrl', function ($scope, $firebase, nameService, FirebaseRef) {
+    var ref = new Firebase(FirebaseRef);
     var sync = $firebase(ref);
     $scope.restaurants = sync.$asArray();
     $scope.hideForm = function() {

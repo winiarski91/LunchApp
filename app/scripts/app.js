@@ -10,6 +10,7 @@
  */
 angular
   .module('lunchApp', ['ui.router', 'firebase', 'LocalStorageModule'])
+  .constant('FirebaseRef','https://lunchwebapp.firebaseio.com/restaurants' )
   .config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('Home');
 
