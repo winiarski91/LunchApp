@@ -24,5 +24,10 @@ angular
         url: '/About',
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
+      })
+      .state('AddRestaurant', {
+        url: '/AddRestaurant/:username',
+        templateUrl: 'views/AddRestaurant.html',
+        controller: 'AddRestaurantCtrl'
       });
   });
