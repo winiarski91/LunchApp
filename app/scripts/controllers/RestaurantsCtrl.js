@@ -12,9 +12,11 @@ angular.module('lunchApp')
     var ref = new Firebase(FirebaseRef);
     var sync = $firebase(ref);
     $scope.restaurants = sync.$asArray();
+    $scope.editUsername = false;
+
     $scope.hideForm = function() {
       var username = nameService.getName();
-      if(username !== null) {
+      if($scope.editUsername !== true && username !== null) {
         $scope.username = username;
         return true;
       }
@@ -32,7 +34,12 @@ angular.module('lunchApp')
     };
 
     $scope.submit = function() {
+      $scope.editUsername = false;
       nameService.setName($scope.username);
+    };
+
+    $scope.cancel = function() {
+      $scope.editUsername = false;
     };
 
 
