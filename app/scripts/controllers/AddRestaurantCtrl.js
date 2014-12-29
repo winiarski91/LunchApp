@@ -12,7 +12,8 @@ angular.module('lunchApp')
       if($scope.description === undefined) {
         $scope.description = '';
       }
-      ref.push({ 'name': $scope.name, 'menuLink': $scope.menuLink, 'addedBy': $scope.username, 'upVoteCount': 0, 'description': $scope.description});
+      ref.push({ 'name': $scope.name, 'menuLink': $scope.menuLink, 'addedBy': $scope.username, 'upVoteCount': 1, 'description': $scope.description,
+      'voters': [{name: $scope.username}]});
       $state.go('Home');
     };
   });
