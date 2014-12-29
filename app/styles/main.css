@@ -85,3 +85,7 @@ body {
 .paddingLeft1px {
   padding-left: 1px;
 }
+
+.voterDiv {
+  display: inline;
+}
