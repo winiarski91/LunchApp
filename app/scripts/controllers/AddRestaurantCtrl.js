@@ -13,7 +13,7 @@ angular.module('lunchApp')
         $scope.description = '';
       }
       ref.push({ 'name': $scope.name, 'menuLink': $scope.menuLink, 'addedBy': $scope.username, 'upVoteCount': 1, 'description': $scope.description,
-      'voters': [{name: $scope.username}]});
+      'upVoters': [{name: $scope.username}], 'downVoters': [{}]});
       $state.go('Home');
     };
   });

@@ -35,9 +35,9 @@
       <span>{{restaurant.description}}</span>
       <br/>
       <a class="btn btn-default" href="{{restaurant.menuLink}}" target="_blank">Menu</a>
-      <div id="voters-list">
+      <div id="voters-list" ng-if="restaurant.upVoters.length > 0">
         <span class="glyphicon glyphicon-ok"></span>
-        <div class="voterDiv" ng-repeat="voter in restaurant.voters">
+        <div class="voterDiv" ng-repeat="voter in restaurant.upVoters">
           <span ng-if="!$last">{{voter.name}}, </span>
           <span ng-if="$last">{{voter.name}}</span>
         </div>

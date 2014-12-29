@@ -24,13 +24,53 @@ angular.module('lunchApp')
     };
 
     $scope.upVote = function(restaurant) {
-      restaurant.upVoteCount++;
-      $scope.restaurants.$save(restaurant);
+      var downVoteIndex;
+      if(restaurant.upVoters === undefined)  {
+        restaurant.upVoteCount++;
+        restaurant.upVoters = [];
+        restaurant.upVoters.push({'name': $scope.username});
+        downVoteIndex = restaurant.downVoters.getIndexBy('name', $scope.username);
+        if(downVoteIndex !== undefined) {
+          restaurant.downVoters.splice(downVoteIndex);
+        }
+        $scope.restaurants.$save(restaurant);
+      } else {
+        var index = restaurant.upVoters.getIndexBy('name', $scope.username);
+        if(index === undefined) {
+          restaurant.upVoteCount++;
+          restaurant.upVoters.push({'name': $scope.username});
+          downVoteIndex = restaurant.downVoters.getIndexBy('name', $scope.username);
+          if(downVoteIndex !== undefined) {
+            restaurant.downVoters.splice(downVoteIndex);
+          }
+          $scope.restaurants.$save(restaurant);
+        }
+      }
     };
 
     $scope.downVote = function(restaurant) {
-      restaurant.upVoteCount--;
-      $scope.restaurants.$save(restaurant);
+      var upVoteIndex;
+      if(restaurant.downVoters === undefined)  {
+        restaurant.upVoteCount--;
+        restaurant.downVoters = [];
+        restaurant.downVoters.push({'name': $scope.username});
+        upVoteIndex = restaurant.upVoters.getIndexBy('name', $scope.username);
+        if(upVoteIndex !== undefined) {
+          restaurant.upVoters.splice(upVoteIndex);
+        }
+        $scope.restaurants.$save(restaurant);
+      } else {
+        var index = restaurant.downVoters.getIndexBy('name', $scope.username);
+        if(index === undefined) {
+          restaurant.upVoteCount--;
+          restaurant.downVoters.push({'name': $scope.username});
+          upVoteIndex = restaurant.upVoters.getIndexBy('name', $scope.username);
+          if(upVoteIndex !== undefined) {
+            restaurant.upVoters.splice(upVoteIndex);
+          }
+          $scope.restaurants.$save(restaurant);
+        }
+      }
     };
 
     $scope.submit = function() {
