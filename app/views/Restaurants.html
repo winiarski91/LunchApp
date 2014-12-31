@@ -18,6 +18,10 @@
   </a>
   <h3>Restaurants</h3>
   <div style="clear: both"></div>
+  <a style="float: right" class="btn btn-danger btn-lg">
+    Stop Voting
+  </a>
+  <div style="clear: both"></div>
   <div class="row restaurant" ng-repeat="restaurant in restaurants | orderBy:'upVoteCount':true">
     <div class="well col-lg-1 col-md-1 col-sm-1 col-xs-2">
       <div class="votingButton" ng-click="upVote(restaurant)">
