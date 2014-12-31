@@ -7,7 +7,7 @@
   <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </form>
 
-<div ng-show="hideForm()">
+<div ng-show="hideForm() && voting.isVotingEnabled">
   <button style="float: right" type="button" class="btn btn-default btn-lg" ng-click="editUsername = true">
     <span class="glyphicon glyphicon-pencil"></span> Edit
   </button>
@@ -18,7 +18,7 @@
   </a>
   <h3>Restaurants</h3>
   <div style="clear: both"></div>
-  <a style="float: right" class="btn btn-danger btn-lg">
+  <a style="float: right" class="btn btn-danger btn-lg" ng-click="stopVoting()">
     Stop Voting
   </a>
   <div style="clear: both"></div>

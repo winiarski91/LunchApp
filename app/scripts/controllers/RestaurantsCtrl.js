@@ -11,7 +11,8 @@ angular.module('lunchApp')
   .controller('RestaurantsCtrl', function ($scope, $firebase, nameService, FirebaseRef) {
     var ref = new Firebase(FirebaseRef);
     var sync = $firebase(ref);
-    $scope.restaurants = sync.$asArray();
+    $scope.voting = sync.$asObject();
+    $scope.restaurants = $firebase(ref.child('restaurants')).$asArray();
     $scope.editUsername = false;
 
     $scope.hideForm = function() {
@@ -71,6 +72,11 @@ angular.module('lunchApp')
           $scope.restaurants.$save(restaurant);
         }
       }
+    };
+
+    $scope.stopVoting = function() {
+      $scope.voting.isVotingEnabled = false;
+      $scope.voting.$save();
     };
 
     $scope.submit = function() {
