@@ -13,6 +13,7 @@ angular.module('lunchApp')
     var sync = $firebase(ref);
     $scope.voting = sync.$asObject();
     $scope.restaurants = $firebase(ref.child('restaurants')).$asArray();
+    $scope.orders = $firebase(ref.child('orders')).$asArray();
     $scope.editUsername = false;
 
     $scope.hideForm = function() {
@@ -76,6 +77,7 @@ angular.module('lunchApp')
 
     $scope.stopVoting = function() {
       $scope.voting.isVotingEnabled = false;
+      $scope.voting.selectedRestaurant = _.max($scope.restaurants, function(restaurant){ return restaurant.upVoteCount; });
       $scope.voting.$save();
     };
 

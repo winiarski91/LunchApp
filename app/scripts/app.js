@@ -25,6 +25,11 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
+      .state('AddMeal', {
+        url: '/AddMeal/:username',
+        templateUrl: 'views/AddMeal.html',
+        controller: 'AddMealCtrl'
+      })
       .state('AddRestaurant', {
         url: '/AddRestaurant/:username',
         templateUrl: 'views/AddRestaurant.html',

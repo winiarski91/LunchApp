@@ -1,0 +1,10 @@
+<form role="form" >
+  <div class="form-group">
+    <label for="mealName">Meal name</label>
+    <input ng-model="name" required type="name" class="form-control" id="mealName" placeholder="Enter meal name">
+    <label for="quantity">Quantity</label>
+    <input ng-model="quantity" type="number" name="quantity" id="quantity" min="1" required>
+  </div>
+  <button type="submit" class="btn btn-default" ng-click="addMeal()">Submit</button>
+  <a class="btn btn-warning" ui-sref="Home">Cancel</a>
+</form>

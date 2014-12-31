@@ -50,4 +50,22 @@
   </div>
 </div>
 
+<div ng-show="hideForm() && !voting.isVotingEnabled">
+  <div>
+      <h3>We have selected {{voting.selectedRestaurant.name}}</h3>
+      <div id="description">{{voting.selectedRestaurant.description}}</div>
+      <h4>Feel free to place your order.</h4>
+      <a class="btn btn-default" href="{{voting.selectedRestaurant.menuLink}}" target="_blank">Menu</a>
+      <a style="float: right" class="btn btn-success" ui-sref="AddMeal({username: username})">
+        <span class="glyphicon glyphicon-plus"></span>Add Meal
+      </a>
+      <div style="clear: both"></div>
+  </div>
+  <br/>
+  <div class="row restaurant" ng-repeat="order in orders">
+    <div class="well ">
+      {{order.name}}, {{order.quantity}}
+    </div>
+  </div>
+</div>
 
