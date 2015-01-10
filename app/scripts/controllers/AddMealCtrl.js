@@ -12,7 +12,7 @@ angular.module('lunchApp')
       if($scope.description === undefined) {
         $scope.description = '';
       }
-      ref.child('orders').push({ 'name': $scope.name, 'people': [{name: $scope.username}]});
+      ref.child('orders').push({ 'name': $scope.name, 'people': [{name: $scope.username}], 'quantity': $scope.quantity});
       $state.go('Home');
     };
   });

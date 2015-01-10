@@ -69,6 +69,7 @@
       </a>
       <h4>{{order.name}}</h4>
       <div style="clear: both"></div>
+      <h4>Quantity: {{order.quantity}}</h4>
       <div ng-if="order.people.length > 0">
         <span class="glyphicon glyphicon-ok"></span>
         <div class="voterDiv" ng-repeat="person in order.people">

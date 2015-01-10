@@ -92,8 +92,11 @@ angular.module('lunchApp')
 
     $scope.addPerson = function (order) {
       if(order.people.getIndexBy('name', $scope.username) === undefined) {
+        order.quantity++;
         order.people.push({'name': $scope.username});
-        $scope.orders.$save(order);
+      } else {
+        order.quantity++;
       }
+      $scope.orders.$save(order);
     };
   });
