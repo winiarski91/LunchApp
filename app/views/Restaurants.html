@@ -64,7 +64,18 @@
   <br/>
   <div class="row restaurant" ng-repeat="order in orders">
     <div class="well ">
-      {{order.name}}, {{order.quantity}}
+      <a style="float: right" class="btn btn-success" ng-click="addPerson(order)">
+        <span class="glyphicon glyphicon-plus"></span>Add
+      </a>
+      <h4>{{order.name}}</h4>
+      <div style="clear: both"></div>
+      <div ng-if="order.people.length > 0">
+        <span class="glyphicon glyphicon-ok"></span>
+        <div class="voterDiv" ng-repeat="person in order.people">
+          <span ng-if="!$last">{{person.name}}, </span>
+          <span ng-if="$last">{{person.name}}</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

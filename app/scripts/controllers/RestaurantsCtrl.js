@@ -90,5 +90,10 @@ angular.module('lunchApp')
       $scope.editUsername = false;
     };
 
-
+    $scope.addPerson = function (order) {
+      if(order.people.getIndexBy('name', $scope.username) === undefined) {
+        order.people.push({'name': $scope.username});
+        $scope.orders.$save(order);
+      }
+    };
   });
