@@ -1,20 +1,27 @@
 <form role="form" ng-hide="hideForm()">
   <div class="form-group">
     <label for="username">Username</label>
-    <input ng-model="username" type="name" class="form-control" id="username" placeholder="Enter your username">
+    <input ng-model="username" type="name" class="form-control" id="username" placeholder="Enter your username" required>
   </div>
   <button type="submit" class="btn btn-default" ng-click="submit()">Submit</button>
   <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </form>
 
-<div ng-show="hideForm()">
+<div ng-show="hideForm() && voting.isVotingEnabled">
   <button style="float: right" type="button" class="btn btn-default btn-lg" ng-click="editUsername = true">
     <span class="glyphicon glyphicon-pencil"></span> Edit
   </button>
   <h2>Hello {{username}}</h2>
   <div style="clear: both"></div>
+  <a style="float: right" class="btn btn-success btn-lg" ui-sref="AddRestaurant({username: username})">
+    <span class="glyphicon glyphicon-plus"></span>Add
+  </a>
   <h3>Restaurants</h3>
-
+  <div style="clear: both"></div>
+  <a style="float: right" class="btn btn-danger btn-lg" ng-click="stopVoting()">
+    Stop Voting
+  </a>
+  <div style="clear: both"></div>
   <div class="row restaurant" ng-repeat="restaurant in restaurants | orderBy:'upVoteCount':true">
     <div class="well col-lg-1 col-md-1 col-sm-1 col-xs-2">
       <div class="votingButton" ng-click="upVote(restaurant)">
@@ -30,8 +37,47 @@
     <div class="well col-lg-11 col-md-11 col-sm-11 col-xs-10">
       <h4 class="well-title">{{restaurant.name}}</h4>
       <span>{{restaurant.description}}</span>
+      <br/>
+      <a class="btn btn-default" href="{{restaurant.menuLink}}" target="_blank">Menu</a>
+      <div id="voters-list" ng-if="restaurant.upVoters.length > 0">
+        <span class="glyphicon glyphicon-ok"></span>
+        <div class="voterDiv" ng-repeat="voter in restaurant.upVoters">
+          <span ng-if="!$last">{{voter.name}}, </span>
+          <span ng-if="$last">{{voter.name}}</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
+<div ng-show="hideForm() && !voting.isVotingEnabled">
+  <div>
+      <h3>We have selected {{voting.selectedRestaurant.name}}</h3>
+      <div id="description">{{voting.selectedRestaurant.description}}</div>
+      <h4>Feel free to place your order.</h4>
+      <a class="btn btn-default" href="{{voting.selectedRestaurant.menuLink}}" target="_blank">Menu</a>
+      <a style="float: right" class="btn btn-success" ui-sref="AddMeal({username: username})">
+        <span class="glyphicon glyphicon-plus"></span>Add Meal
+      </a>
+      <div style="clear: both"></div>
+  </div>
+  <br/>
+  <div class="row restaurant" ng-repeat="order in orders">
+    <div class="well ">
+      <a style="float: right" class="btn btn-success" ng-click="addPerson(order)">
+        <span class="glyphicon glyphicon-plus"></span>Add
+      </a>
+      <h4>{{order.name}}</h4>
+      <div style="clear: both"></div>
+      <h4>Quantity: {{order.quantity}}</h4>
+      <div ng-if="order.people.length > 0">
+        <span class="glyphicon glyphicon-ok"></span>
+        <div class="voterDiv" ng-repeat="person in order.people">
+          <span ng-if="!$last">{{person.name}}, </span>
+          <span ng-if="$last">{{person.name}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 

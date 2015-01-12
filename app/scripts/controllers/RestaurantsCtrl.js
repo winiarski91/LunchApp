@@ -11,7 +11,9 @@ angular.module('lunchApp')
   .controller('RestaurantsCtrl', function ($scope, $firebase, nameService, FirebaseRef) {
     var ref = new Firebase(FirebaseRef);
     var sync = $firebase(ref);
-    $scope.restaurants = sync.$asArray();
+    $scope.voting = sync.$asObject();
+    $scope.restaurants = $firebase(ref.child('restaurants')).$asArray();
+    $scope.orders = $firebase(ref.child('orders')).$asArray();
     $scope.editUsername = false;
 
     $scope.hideForm = function() {
@@ -24,13 +26,59 @@ angular.module('lunchApp')
     };
 
     $scope.upVote = function(restaurant) {
-      restaurant.upVoteCount++;
-      $scope.restaurants.$save(restaurant);
+      var downVoteIndex;
+      if(restaurant.upVoters === undefined)  {
+        restaurant.upVoteCount++;
+        restaurant.upVoters = [];
+        restaurant.upVoters.push({'name': $scope.username});
+        downVoteIndex = restaurant.downVoters.getIndexBy('name', $scope.username);
+        if(downVoteIndex !== undefined) {
+          restaurant.downVoters.splice(downVoteIndex);
+        }
+        $scope.restaurants.$save(restaurant);
+      } else {
+        var index = restaurant.upVoters.getIndexBy('name', $scope.username);
+        if(index === undefined) {
+          restaurant.upVoteCount++;
+          restaurant.upVoters.push({'name': $scope.username});
+          downVoteIndex = restaurant.downVoters.getIndexBy('name', $scope.username);
+          if(downVoteIndex !== undefined) {
+            restaurant.downVoters.splice(downVoteIndex);
+          }
+          $scope.restaurants.$save(restaurant);
+        }
+      }
     };
 
     $scope.downVote = function(restaurant) {
-      restaurant.upVoteCount--;
-      $scope.restaurants.$save(restaurant);
+      var upVoteIndex;
+      if(restaurant.downVoters === undefined)  {
+        restaurant.upVoteCount--;
+        restaurant.downVoters = [];
+        restaurant.downVoters.push({'name': $scope.username});
+        upVoteIndex = restaurant.upVoters.getIndexBy('name', $scope.username);
+        if(upVoteIndex !== undefined) {
+          restaurant.upVoters.splice(upVoteIndex);
+        }
+        $scope.restaurants.$save(restaurant);
+      } else {
+        var index = restaurant.downVoters.getIndexBy('name', $scope.username);
+        if(index === undefined) {
+          restaurant.upVoteCount--;
+          restaurant.downVoters.push({'name': $scope.username});
+          upVoteIndex = restaurant.upVoters.getIndexBy('name', $scope.username);
+          if(upVoteIndex !== undefined) {
+            restaurant.upVoters.splice(upVoteIndex);
+          }
+          $scope.restaurants.$save(restaurant);
+        }
+      }
+    };
+
+    $scope.stopVoting = function() {
+      $scope.voting.isVotingEnabled = false;
+      $scope.voting.selectedRestaurant = _.max($scope.restaurants, function(restaurant){ return restaurant.upVoteCount; });
+      $scope.voting.$save();
     };
 
     $scope.submit = function() {
@@ -42,5 +90,13 @@ angular.module('lunchApp')
       $scope.editUsername = false;
     };
 
-
+    $scope.addPerson = function (order) {
+      if(order.people.getIndexBy('name', $scope.username) === undefined) {
+        order.quantity++;
+        order.people.push({'name': $scope.username});
+      } else {
+        order.quantity++;
+      }
+      $scope.orders.$save(order);
+    };
   });

@@ -10,7 +10,7 @@
  */
 angular
   .module('lunchApp', ['ui.router', 'firebase', 'LocalStorageModule'])
-  .constant('FirebaseRef','https://lunchwebapp.firebaseio.com/restaurants' )
+  .constant('FirebaseRef','https://lunchwebapp.firebaseio.com/' )
   .config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('Home');
 
@@ -24,5 +24,15 @@ angular
         url: '/About',
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
+      })
+      .state('AddMeal', {
+        url: '/AddMeal/:username',
+        templateUrl: 'views/AddMeal.html',
+        controller: 'AddMealCtrl'
+      })
+      .state('AddRestaurant', {
+        url: '/AddRestaurant/:username',
+        templateUrl: 'views/AddRestaurant.html',
+        controller: 'AddRestaurantCtrl'
       });
   });

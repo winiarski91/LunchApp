@@ -1,0 +1,12 @@
+<form role="form" >
+  <div class="form-group">
+    <label for="restaurantName">Restaurant name</label>
+    <input ng-model="name" required type="name" class="form-control" id="restaurantName" placeholder="Enter restaurant name">
+    <label for="menuLink">Menu link</label>
+    <input ng-model="menuLink" required type="url" class="form-control" id="menuLink" placeholder="Enter menu link">
+    <label for="description">Description</label>
+    <input ng-model="description" type="text" class="form-control" id="description" placeholder="Enter description">
+  </div>
+  <button type="submit" class="btn btn-default" ng-click="addRestaurant()">Submit</button>
+  <a class="btn btn-warning" ui-sref="Home">Cancel</a>
+</form>
