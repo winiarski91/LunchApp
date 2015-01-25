@@ -26,12 +26,12 @@ angular
         controller: 'AboutCtrl'
       })
       .state('AddMeal', {
-        url: '/AddMeal/:username',
+        url: '/AddMeal/',
         templateUrl: 'views/AddMeal.html',
         controller: 'AddMealCtrl'
       })
       .state('AddRestaurant', {
-        url: '/AddRestaurant/:username',
+        url: '/AddRestaurant/',
         templateUrl: 'views/AddRestaurant.html',
         controller: 'AddRestaurantCtrl'
       });
