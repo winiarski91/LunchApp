@@ -13,7 +13,7 @@
   </button>
   <h2>Hello {{username}}</h2>
   <div style="clear: both"></div>
-  <a style="float: right" class="btn btn-success btn-lg" ui-sref="AddRestaurant({username: username})">
+  <a style="float: right" class="btn btn-success btn-lg" ui-sref="AddRestaurant()">
     <span class="glyphicon glyphicon-plus"></span>Add
   </a>
   <h3>Restaurants</h3>
@@ -56,7 +56,7 @@
       <div id="description">{{voting.selectedRestaurant.description}}</div>
       <h4>Feel free to place your order.</h4>
       <a class="btn btn-default" href="{{voting.selectedRestaurant.menuLink}}" target="_blank">Menu</a>
-      <a style="float: right" class="btn btn-success" ui-sref="AddMeal({username: username})">
+      <a style="float: right" class="btn btn-success" ui-sref="AddMeal()">
         <span class="glyphicon glyphicon-plus"></span>Add Meal
       </a>
       <div style="clear: both"></div>

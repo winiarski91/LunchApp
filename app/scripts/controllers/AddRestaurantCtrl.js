@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('lunchApp')
-  .controller('AddRestaurantCtrl', function ($scope, $state, $stateParams, $firebase, FirebaseRef) {
-    if($stateParams.username === undefined) {
+  .controller('AddRestaurantCtrl', function ($scope, $state, $stateParams, $firebase, FirebaseRef, nameService) {
+    if(nameService.getName() === undefined || nameService.getName() === null) {
       $state.go('Home');
     }
     var ref = new Firebase(FirebaseRef);
-    $scope.username = $stateParams.username;
+    $scope.username = nameService.getName();
 
     $scope.addRestaurant = function() {
       if($scope.description === undefined) {
