@@ -7,7 +7,7 @@
   <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </form>
 
-<div ng-show="hideForm() && voting.isVotingEnabled">
+<div ng-show="hideForm() && (voting.isVotingEnabled === undefined || voting.isVotingEnabled === true)">
   <button style="float: right" type="button" class="btn btn-default btn-lg" ng-click="editUsername = true">
     <span class="glyphicon glyphicon-pencil"></span> Edit
   </button>
@@ -50,7 +50,7 @@
   </div>
 </div>
 
-<div ng-show="hideForm() && !voting.isVotingEnabled">
+<div ng-show="hideForm() && (voting.isVotingEnabled !== undefined) && voting.isVotingEnabled === false">
   <div>
       <h3>We have selected {{voting.selectedRestaurant.name}}</h3>
       <div id="description">{{voting.selectedRestaurant.description}}</div>
@@ -72,7 +72,7 @@
       <h4>Quantity: {{order.quantity}}</h4>
       <div ng-if="order.people.length > 0">
         <span class="glyphicon glyphicon-ok"></span>
-        <div class="voterDiv" ng-repeat="person in order.people">
+        <div class="voterDiv" ng-repeat="person in order.upVoters">
           <span ng-if="!$last">{{person.name}}, </span>
           <span ng-if="$last">{{person.name}}</span>
         </div>
